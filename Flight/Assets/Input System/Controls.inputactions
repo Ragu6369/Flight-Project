@@ -1,0 +1,214 @@
+{
+    "version": 1,
+    "name": "Controls",
+    "maps": [
+        {
+            "name": "Movement",
+            "id": "f5effd55-f07c-42ba-924c-38541f2d18e1",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "e7dd76d2-60af-403c-b668-30b9ecf2c48d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Camera",
+                    "type": "Value",
+                    "id": "59c65ffa-eaa7-43b3-be86-f85e14a59d45",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Run",
+                    "type": "Button",
+                    "id": "acdaa003-f104-4499-b5a3-4e1890c381cd",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "9ad7be96-6963-4470-b1e1-669e01f2923c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "JUMP",
+                    "type": "Button",
+                    "id": "47c90019-8c28-4e07-93be-8a5896fc52f1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "682360cd-3cc3-426c-82e2-27976cf15575",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "3bedf0a7-82b1-4b7c-987a-3ac5fa52cfa0",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "1962b4f9-c899-4fd8-8a31-909eb3d40204",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "a2543337-a916-46a6-9d23-1c23a7ec154d",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "a645e888-b63b-43e2-8b8d-46e3cb6f0746",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "80446422-491e-4815-a716-d2e13ffe5a7f",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "ae5072a3-aea4-464f-9e5b-13511927a325",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e9ce3ba-d984-4edc-83f3-e85c83443ebe",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0775cc08-5865-47c5-bf30-9cc5a45549ca",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f176104-a2c4-4bc7-8c24-aa0453f762d5",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "81f29ca4-94d9-4962-bf34-b3377361fdc0",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ddfb1f05-1400-4049-be69-ce104bcb5d12",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2418e4e8-2b3e-43a6-ac97-5e65beb91762",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JUMP",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8577bed9-444c-4475-a164-c036975be519",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JUMP",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
