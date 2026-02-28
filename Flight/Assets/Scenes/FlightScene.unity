@@ -957,7 +957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &233572363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4284,6 +4284,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5832292432768362108, guid: 06b9bcd64968c394d9d4fa5ee78a35e7,
+        type: 3}
+      propertyPath: jumpForce
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5868642167151801819, guid: 06b9bcd64968c394d9d4fa5ee78a35e7,
         type: 3}
       propertyPath: m_Layer
@@ -6171,9 +6176,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Controls:\" WASD and left Stick\" (Movement both)\nLs for Run\n\nRightStick
-    for \"free cam\" ,\n\nin flight num 1 to 7 and LB / RB to switch cams\n\n\"Space\"
-    and \"a\" to jump \n\nin flight \"Enter \" and \"A\" for bomb drop  above red
-    cubes \n\n"
+    for \"free cam\" ,\n\nin flight num 1 to 7 and LB / RB to switch cams\nin Walking
+    LB/RB to select right/left shoulder cam\n\n\"Space\" and \"a\" to jump \n\nin
+    flight \"Enter \" and \"A\" for bomb drop  above red cubes \n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
