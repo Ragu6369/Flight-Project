@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class FlightController : MonoBehaviour
 {
@@ -33,15 +34,20 @@ public class FlightController : MonoBehaviour
     public float maxThrust = 400f;
     [Tooltip("The responsiveness of the Flight to the Roll and Pitch Inputs")]
     public float responsiveness = 2f;
+    public float lift = 135f; // The lift force applied to the Flight, which helps it stay in the air
+
+    [SerializeField] private TextMeshProUGUI Display;
 
     public void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        
     }
 
     public void Update()
     {
         Handleinput();
+        UpdateGUI();
     }
 
     // For Physics based Things
@@ -84,9 +90,17 @@ public class FlightController : MonoBehaviour
         rb.AddTorque(transform.up * yaw * responseModifier);
         rb.AddTorque(transform.right * pitch  * responseModifier);
         rb.AddTorque(transform.forward * roll * responseModifier);
+
+        rb.AddForce(Vector3.up * lift * rb.velocity.magnitude); // To apply lift force based on the speed of the Flight, so faster planes get more lift
     }
 
+    private void UpdateGUI()
+    {
+        Display.text = " Throttle:" + throttle.ToString("F0")+"% \n "; // Display the throttle
+        Display.text +="Altitude:" + transform.position.y.ToString("F0") +"m \n"; // Diaplay the altitude of the Flight
+        Display.text += " Speed:" + (rb.velocity.magnitude * 3.6f) + "km/h \n"; // 1 km = 1000m and 1 hr = 60 min x 60 sec = 3600 sec ,
+        // so 1m/s is 3600m/hr and 3600/1000 = 3.6 km/hr
+    }
 
-   
 
 }

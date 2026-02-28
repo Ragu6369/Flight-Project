@@ -9,7 +9,7 @@ public class BladeSpin : MonoBehaviour
     [SerializeField] private float rotateSpeed = 0f;
     [SerializeField] private float startSpeed = 5f;
     [SerializeField] private float speedincrement = 1f;
-    Rigidbody rb;
+    private Rigidbody rb;
 
     public void Awake()
     {
