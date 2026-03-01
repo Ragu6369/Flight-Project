@@ -34,7 +34,8 @@ public class CubeDestroy : MonoBehaviour
         // If win UI is active, restart scene on any key press
         if (BalloonMovement.winUIInstance != null && BalloonMovement.winUIInstance.activeSelf && ( Input.GetKeyDown(KeyCode.Space) ||Input.GetButtonDown("Fire1"))) 
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            BalloonMovement.score = 0;
+            SceneManager.LoadScene(0);
         }
     }
 

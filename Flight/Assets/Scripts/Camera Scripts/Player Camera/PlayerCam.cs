@@ -73,7 +73,7 @@ public class TPSCamera : MonoBehaviour
         if(isLookingAtBack)
         {
             Quaternion targetRotation = Quaternion.LookRotation(player.forward,Vector3.up);
-            rotation = Quaternion.Slerp(rotation, targetRotation, Time.deltaTime * rotBackSpeed);
+            rotation = Quaternion.Slerp(rotation, targetRotation, (Time.deltaTime * rotBackSpeed )/10f); // here dividing speed by make it smooth instead of jittery
 
             // make player move forward for N seconds 
             player.GetComponent<PlayerMovement>().ForceForwardForSeconds(MoveforwardDuration);

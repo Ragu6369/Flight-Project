@@ -17,8 +17,9 @@ public class FlightEntryManager : MonoBehaviour
 
     [Header("Sphere Settings")]
     public float detectionRadius = 5f;       
-    public LayerMask playerLayer;            
+    public LayerMask playerLayer;
 
+    public float groundCheckDistance = 1.7f;
     private bool inFlight = false;
     private bool playerNearby = false;
 
@@ -69,6 +70,8 @@ public class FlightEntryManager : MonoBehaviour
         {
             ToggleControl();
         }
+
+        
     }
 
     private void ToggleControl()
@@ -109,38 +112,19 @@ public class FlightEntryManager : MonoBehaviour
             player.position = playerRespawnPoint.position;
             player.rotation = playerRespawnPoint.rotation;
             player.gameObject.SetActive(true);
-            if(playerAnimator != null)
-            {
-                playerAnimator.SetBool("IsJumping",true);
-                playerAnimator.SetBool("IsFalling ", true);
 
-            }
+            // changing anim states
+            playerAnimator.SetBool("IsJumping", true);
+            // playerAnimator.SetBool("IsFalling ", true);
 
-
-            if (flightCamera != null)
-            {
-                flightCamera.gameObject.SetActive(false);
-            }
-
-            if (flightController != null)
-            {
-                flightController.enabled = false;
-            }
-
-            if (BladespinnerScript != null)
-            {
-                BladespinnerScript.enabled = false;
-            }
-            if (BalloonDropScript != null)
-            {
-                BalloonDropScript.enabled = false;
-            }
+            flightCamera.gameObject.SetActive(false);
+            flightController.enabled = false;
+            BladespinnerScript.enabled = false;
+            BalloonDropScript.enabled = false;
 
             if (uiPrompt != null) uiPrompt.SetActive(true);
         }
     }
-
-   
 
     private void OnDrawGizmosSelected()
     {

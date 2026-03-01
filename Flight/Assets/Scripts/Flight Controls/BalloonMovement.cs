@@ -9,7 +9,7 @@ public class BalloonMovement : MonoBehaviour
     public float fallSpeed = 2f;
 
     [Header("Game Settings")]
-    public static int score = 0;              // Shared score across balloons
+    [SerializeField] public static int score = 0;              // Shared score across balloons
     public static int scoreLimit = 3 ;         // Win condition
     public GameObject winUI;                  // Assign in prefab or manager
     public static GameObject winUIInstance;   // Static reference
@@ -28,6 +28,6 @@ public class BalloonMovement : MonoBehaviour
     {
         // Sway left-right while falling
         float sway = Mathf.Sin(Time.time * swaySpeed + swayOffset) * swayAmount;
-        transform.position += new Vector3(sway, -fallSpeed * Time.deltaTime, 0);
+        transform.position += new Vector3((sway)/10f, -fallSpeed * Time.deltaTime, 0);
     }
 }

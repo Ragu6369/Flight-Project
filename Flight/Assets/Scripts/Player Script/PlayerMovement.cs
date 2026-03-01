@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Values")]
     [SerializeField] private float moveSpeed = 6f;
+    [SerializeField] private float lowSpeed = 0.5f;
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private float groundCheckDistance = 1.1f;
@@ -19,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform cameraArm;
     public Animator anim;
 
+    public LayerMask groundLayer;
+
     private Rigidbody rb;
     private Vector3 moveInput;
     private float horizontalInput;
@@ -27,18 +30,22 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 camRight;
     [SerializeField] private bool IsJumping = false;
     [SerializeField] private bool forceForawrd = false;
+    [SerializeField] private bool IsMoving = false;
+    [SerializeField] private bool Grounded = false;
     public float currentSpeed;
     public float fallCheck = 8f;
     public float rollcheck = 3f;
+    public float aboveGroundCheck = 8f;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        currentSpeed = moveSpeed;
+        currentSpeed = lowSpeed;
     }
 
     private void Update()
     {
+        Grounded = IsGrounded();
         // Input
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
@@ -53,7 +60,76 @@ public class PlayerMovement : MonoBehaviour
         if (forceForawrd)
         {
             moveInput = camForward; // straight in cam forward 
-           
+
+        }
+
+
+        MoveLogic();
+        JumpLogic();
+
+        // Animator states
+        anim.SetBool("IsWalking",IsMoving);
+        anim.SetBool("IsRunning", moveInput != Vector3.zero && Input.GetButton("Run"));
+        anim.SetBool("IsJumping", IsJumping);
+
+        // fall check height
+        HighCheck(fallCheck);
+
+        // roll check height
+        RollingCheck(rollcheck);
+
+        if(IsMoving && !Input.GetButton("Run"))
+        {
+            currentSpeed = Mathf.MoveTowards(currentSpeed, moveSpeed, acceleration * Time.deltaTime);
+        }
+        if(!IsMoving)
+        {
+            currentSpeed = moveSpeed;
+        }
+        
+        // Speed control for running
+        if (Input.GetButton("Run") && moveInput != Vector3.zero)
+        {
+            currentSpeed = Mathf.MoveTowards(currentSpeed, runSpeedLimit, acceleration * Time.deltaTime);
+            anim.SetBool("IsWalking", true);
+            anim.SetBool("IsRunning", true);
+
+
+        }
+        else
+        {
+            currentSpeed = Mathf.MoveTowards(currentSpeed, moveSpeed, acceleration * Time.deltaTime);
+        }
+
+        
+    }
+
+    private void FixedUpdate()
+    {
+        MovePlayer();
+        OnJump();
+    }
+
+    private void MoveLogic()
+    {
+
+        if (moveInput != Vector3.zero)
+        {
+            IsMoving = true;
+        }
+        else
+        {
+            IsMoving = false;
+        }
+    }
+
+    private void JumpLogic()
+    {
+
+
+        if (!IsGrounded())
+        {
+            AboveGrounds();
         }
 
         if (IsGrounded() && IsJumping == true)
@@ -66,35 +142,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Animator states
-        anim.SetBool("IsWalking",moveInput != Vector3.zero && !Input.GetButton("Run"));
-        anim.SetBool("IsRunning", moveInput != Vector3.zero && Input.GetButton("Run"));
-        anim.SetBool("IsJumping", IsJumping);
-
-        // fall check height
-        HighCheck(fallCheck);
-
-        // roll check height
-        RollingCheck(rollcheck);
-
-        // Speed control for running
-        if (Input.GetButton("Run") && moveInput != Vector3.zero)
-        {
-            currentSpeed = Mathf.MoveTowards(currentSpeed, runSpeedLimit, acceleration * Time.deltaTime);
-            anim.SetBool("IsWalking", true);
-            anim.SetBool("IsRunning", true);
-            
-        }
-        else
-        {
-            currentSpeed = Mathf.MoveTowards(currentSpeed, moveSpeed, acceleration * Time.deltaTime);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        MovePlayer();
-        OnJump();
     }
 
     private void MovePlayer()
@@ -154,6 +201,21 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void AboveGrounds()
+    {
+       bool hit = Physics.Raycast(transform.position, Vector3.down,aboveGroundCheck,groundLayer);
+
+       if(!hit)
+       {
+            if(!IsJumping)
+            {
+                IsJumping = true;
+                anim.SetBool("IsJumping", true);
+            }
+            
+       }
+
+    }
     private void RollingCheck(float rayLength)
     {
         if (IsJumping && !IsGrounded())

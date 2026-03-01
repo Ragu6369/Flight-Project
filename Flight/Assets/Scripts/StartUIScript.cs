@@ -11,7 +11,7 @@ public class StartUIManager : MonoBehaviour
     // Static flag persists across scene reloads
     private static bool hasShownStartUI = false;
 
-    private void Start()
+    private void Awake()
     {
         if (!hasShownStartUI && startUI != null)
         {
@@ -34,11 +34,6 @@ public class StartUIManager : MonoBehaviour
     {
         if (uiActive && ( Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)))
         {
-            if (startUI != null)
-            {
-                startUI.SetActive(false);
-            }
-
             HideUI();
             Time.timeScale = 1.0f;
         }
@@ -46,7 +41,12 @@ public class StartUIManager : MonoBehaviour
 
     private void HideUI()
     {
-        
+
+        if (startUI != null)
+        {
+            startUI.SetActive(false);
+        }
+
         uiActive = false;
         hasShownStartUI = true; // Mark as shown so it won't appear again
        
