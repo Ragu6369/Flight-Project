@@ -135,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
         if (IsGrounded() && IsJumping == true)
         {
             GravityTimer += Time.deltaTime;
-            if (GravityTimer >= 0.6f) // time after which player can jump again
+            if (GravityTimer >= 1f) // time after which player can jump again
             {
                 IsJumping = false;
                 GravityTimer = 0f;
